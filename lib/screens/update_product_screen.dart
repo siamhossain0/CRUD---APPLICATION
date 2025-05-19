@@ -34,6 +34,11 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
     _codeTEController.text = widget.product.productCode;
     _qualityTEController.text = widget.product.quantity;
     _totalPriceTEController.text = widget.product.totalPrice;
+
+    _qualityTEController.addListener(_calculateTotalPrice);
+    _unitPriceTEController.addListener(_calculateTotalPrice);
+
+
     super.initState();
   }
 
@@ -89,6 +94,14 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
             labelText: "Quantity",
           ),
         ),
+        TextFormField(
+          controller: _totalPriceTEController,
+          readOnly: true,
+          decoration: const InputDecoration(
+            hintText: "Total price",
+            labelText: "Total Price",
+          ),
+        ),
 
         const SizedBox(height: 16),
         ElevatedButton(
@@ -107,6 +120,12 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
     if (_formkey.currentState!.validate()) {
       updateProduct(widget.product.id);
     }
+  }
+  void _calculateTotalPrice(){
+    final qty = int.tryParse(_qualityTEController.text)?? 0;
+    final unitPrice = int.tryParse(_unitPriceTEController.text)?? 0;
+    final total =qty*unitPrice;
+    _totalPriceTEController.text = total.toString();
   }
 
   Future<void> updateProduct(String id) async {
@@ -151,6 +170,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   @override
   void dispose() {
     _productNameTEController.dispose();
+    _qualityTEController.removeListener(_calculateTotalPrice);
+    _unitPriceTEController.removeListener(_calculateTotalPrice);
     _qualityTEController.dispose();
     _unitPriceTEController.dispose();
     _codeTEController.dispose();
