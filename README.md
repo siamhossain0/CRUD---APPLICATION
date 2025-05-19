@@ -25,3 +25,45 @@ This is a simple Flutter-based CRUD (Create, Read, Update, Delete) application t
 ├── main.dart                       # Application entry point
 ├── pubspec.yaml                    # Project configuration and dependencies
 ```
+## Getting Started
+
+### Prerequisites
+
+To run this project, you need to have Flutter installed. If Flutter is not installed on your machine, follow the instructions [here](https://flutter.dev/docs/get-started/install).
+
+### Installation
+
+1. Clone this repository:
+
+```bash
+git clone https://github.com/your-username/crudapp.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd crudapp
+```
+
+3. Install the required dependencies:
+
+```bash
+flutter pub get
+```
+
+4. Run the application:
+
+```bash
+flutter run
+```
+
+### Backend Setup
+
+The application interacts with a REST API hosted at `http://164.68.107.70:6060/api/v1/`. Ensure that this API is running and accessible.
+API endpoints used in this project:
+
+- `GET /api/v1/ReadProduct`: Fetches the list of products.
+- `POST /api/v1/CreateProduct`: Creates a new product.
+- `POST /api/v1/UpdateProduct/{id}`: Updates an existing product.
+- `GET /api/v1/DeleteProduct/{id}`: Deletes a product.
+
